@@ -21,4 +21,9 @@ kernel.bin: boot.o kernel.o linker.ld
 clean:
 	rm -f *.o kernel.bin
 
-.PHONY: all clean
+.PHONY: all clean iso
+
+iso: kernel.bin
+	mkdir -p iso/boot/grub
+	cp kernel.bin iso/boot/
+	printf 'set timeout=0\nset default=0\n\nmenuentry "SimpleKernel" {\n    multiboot /boot/kernel.bin\n    boot\n}\n' > iso/boot/grub/grub.cfg
