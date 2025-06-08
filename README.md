@@ -55,5 +55,4 @@ The resulting `SimpleKernel.iso` can be used to boot the kernel.
 3. Start the VM. GRUB should load and the screen will display the message from
    the kernel.
 
-The kernel simply writes `Hello from SimpleKernel!` to VGA text memory and then
-loops forever.
+The kernel now displays a small command prompt. It waits for keyboard input and echoes each line you type.
