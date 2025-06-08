@@ -8,11 +8,14 @@ instructions below describe how to build the kernel and run it in
 ## Building
 
 You need a few build tools including **gcc**, **nasm**, **ld**, and **grub**.
-On Debian/Ubuntu systems install the following packages:
+Because the kernel is 32-bit, the `gcc -m32` option must be available. On
+Debian/Ubuntu systems install the following packages:
 
 ```bash
-sudo apt-get install build-essential nasm grub-pc-bin xorriso
+sudo apt-get install build-essential nasm grub-pc-bin xorriso gcc-multilib
 ```
+Alternatively you can use a 32-bit cross-compiler package such as
+`gcc-i686-linux-gnu` so that `gcc -m32` works.
 
 To build the kernel binary run:
 
