@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-static uint16_t* const VIDEO_MEMORY = (uint16_t*)0xB8000;
+static volatile uint16_t* const VIDEO_MEMORY = (volatile uint16_t*)0xB8000;
 
 void kernel_main(void) {
     const char* message = "Hello from SimpleKernel!";
