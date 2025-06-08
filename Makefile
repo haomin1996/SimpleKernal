@@ -14,9 +14,11 @@ boot.o: boot.s
 kernel.o: kernel.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-kernel.bin: boot.o kernel.o linker.ld
-	$(LD) $(LDFLAGS) -o $@ boot.o kernel.o
+interrupts.o: interrupts.s
+	$(AS) --32 $< -o $@
 
+kernel.bin: boot.o kernel.o interrupts.o linker.ld
+	$(LD) $(LDFLAGS) -o $@ boot.o kernel.o interrupts.o
 
 clean:
 	rm -f *.o kernel.bin
@@ -26,4 +28,4 @@ clean:
 iso: kernel.bin
 	mkdir -p iso/boot/grub
 	cp kernel.bin iso/boot/
-	printf 'set timeout=0\nset default=0\n\nmenuentry "SimpleKernel" {\n    multiboot /boot/kernel.bin\n    boot\n}\n' > iso/boot/grub/grub.cfg
+	printf 'set timeout=0\nset default=0\n\nmenuentry "SimpleKernel" {\nmultiboot /boot/kernel.bin\n    boot\n}\n' > iso/boot/grub/grub.cfg
