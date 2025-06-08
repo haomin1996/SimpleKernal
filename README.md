@@ -55,4 +55,7 @@ The resulting `SimpleKernel.iso` can be used to boot the kernel.
 3. Start the VM. GRUB should load and the screen will display the message from
    the kernel.
 
-The kernel now displays a small command prompt. It waits for keyboard input and echoes each line you type.
+The kernel now features a small preemptive round robin scheduler. Two command
+prompts run in parallel: one echoes back each line and the other prints the word
+count. Press **Tab** to switch the focused program. Input is delivered only to
+the focused prompt while the other continues running in the background.
